@@ -1,0 +1,53 @@
+---
+title: "Read Doric File"
+output:
+  html_document:
+    df_print: paged
+---
+
+Three possible options on how you can implement this code for your data analysis:
+
+1. Open [R Studio Cloud](https://posit.cloud/content/), upload this R notebook and Console_Acq_0000.doric file there. Then open the notebook and follow the instructions.
+
+2. Download this R notebook and Console_Acq_0000.doric example file to your computer. Then open the notebook and follow the instructions. We assume that you have [RStudio](https://posit.co/download/rstudio-desktop/) installed.
+
+3. Open the [R notebook html]() and copy parts of this code to your matlab code.
+
+### Install and import library
+Install the rhdf5 library by running the next code cell. If the library is already 
+installed, skip to the next code cell.
+```{r}
+install.packages("BiocManager")
+BiocManager::install("rhdf5")
+```
+Import the rhdf5 library
+```{r}
+library("rhdf5")
+```
+
+### Set file path
+Edit the following cell with your file path
+```{r}
+filename = "Console_Acq_0000.doric"
+```
+
+### Print all file tree (optional)
+This allows you to identify the path of each dataset of interest and its associated time vector. But Feel free to skip this step, since you can check the file structure in the Doric File Editor of DNS software.
+```{r}
+h5ls(filename)
+```
+Note that when using the Lock-In mode, the photometry demodulated signals have the following path naming: “DataAcquisition/FPConsole/Signals/Series#/AIN#xAOUT#-LockIn/Values” and associated Time vector: “DataAcquisition/FPConsole/Signals/Series#/AIN#xAOUT#-LockIn/Time”
+
+### Load signal
+Check the file structure and pick the signals you would like to load. Paste the paths to selected datasets:
+```{r}
+signal <- h5read(filename,'/DataAcquisition/FPConsole/Signals/Series0003/AnalogIn/AIN01')
+time   <- h5read(filename,'/DataAcquisition/FPConsole/Signals/Series0003/AnalogIn/Time')
+```
+
+### Plot loaded signal
+```{r}
+plot(time, signal)
+```
+Read more about [rhdf5 library](https://www.neonscience.org/resources/learning-hub/tutorials/hdf5-intro-r).
+
