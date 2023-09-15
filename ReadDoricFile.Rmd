@@ -11,7 +11,7 @@ Three possible options on how you can implement this code for your data analysis
 
 2. Download this R notebook and Console_Acq_0000.doric example file to your computer. Then open the notebook and follow the instructions. We assume that you have [RStudio](https://posit.co/download/rstudio-desktop/) installed.
 
-3. Open the [R notebook html]() and copy parts of this code to your matlab code.
+3. Open the R notebook with one of the first 2 options and copy parts of this code to your R code.
 
 ### Install and import library
 Install the rhdf5 library by running the next code cell. If the library is already 
